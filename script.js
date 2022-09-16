@@ -1,22 +1,42 @@
-export const ship =  (length, hits, sunk) => {
-    hits = length;
+const ship =  (health, name, sunk) => {
+    let hits = 0; 
     sunk = false; 
-    const isHit = (target) => hits.splice(hits.indexOf(target), 1);
+    const isHit = () => hits += 1;
     const isSunk = () =>  {
-        if (hits.length === 0) {
+        if (hits === health) {
             return true;
         }
         return false
     } 
-    return {length, hits, sunk, isHit, isSunk}
+    return {health, name, sunk, isHit, isSunk}
     
 }
 
-export function isSunk () {
-    if (this.length === 0) {
-        return true;
-    }
-    return false
-}
 
-export const patrolBoat = ship(['[1:1]', '[2:2]'],);
+export const patrolBoat = ship(2, 'Patrol Boat');
+
+const gameboard = () => {
+    const squares = ['[1:1]','[1:2]', '[1:3]', '[1:4]', '[1:5]', '[1:6]', '[1:7]', '[1:8]', '[1:9]', '[1:10]', '[2:1]', "[2:2]", '[2:3]', '[2:4]', '[2:5]', '[2:6]', '[2:7]', '[2:8]', '[2:9]', '[2:10]', '[3:1]', '[3:2]', '[3:3]', '[3:4]', '[3:5]', '[3:6]', '[3:7]', '[3:8]', '[3:9]', '[3:10]', '[4:1]', '[4:2]', '[4:3]', '[4:4]', '[4:5]', '[4:6]', '[4:7]', '[4:8]', '[4:9]', '[4:10]', '[5:1]', '[5:2]', '[5:3]', '[5:4]', '[5:5]', '[5:6]', '[5:7]', '[5:8]', '[5:9]', '[5:10]', '[6:1]', '[6:2]', '[6:3]', '[6:4]', '[6:5]', '[6:6]', '[6:7]', '[6:8]', '[6:9]', '[6:10]', '[7:1]', '[7:2]', '[7:3]', '[7:4]', '[7:5]', '[7:6]', '[7:7]', '[7:8]', '[7:9]', '[7:10]', '[8:1]', '[8:2]', '[8:3]', '[8:4]', '[8:5]', '[8:6]', '[8:7]', '[8:8]', '[8:9]', '[8:10]', '[9:1]', '[9:2]', '[9:3]', '[9:4]', '[9:5]', '[9:6]', '[9:7]', '[9:8]', '[9:9]', '[9:10]', '[10:1]', '[10:2]', '[10:3]', '[10:4]', '[10:5]', '[10:6]', '[10:7]', '[10:8]', '[10:9]', '[10:10]' ] 
+    const board = squares.reduce((accumulator, value) => {
+        return {...accumulator, [value]: ''};
+      }, {});
+      
+    const placeShip = (type, coOrdinates) => {
+        for (let i of coOrdinates) {
+            board[i] = type;
+        }
+        return board
+    };
+
+    const recieveAttack = (coOrdinates) => {
+        if (board[coOrdinates] !== '') {
+           return board[`${coOrdinates}`].isHit()
+        }
+        return false
+    }
+    
+    return {board, placeShip, recieveAttack}
+}; 
+
+export const board1 = gameboard();
+board1.placeShip(patrolBoat, ['[1:1]','[2:2]'])
