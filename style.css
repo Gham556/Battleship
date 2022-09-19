@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#playerBoard, #compBoard {
+    display: grid;
+    grid-template-rows: repeat(10, auto);
+    margin: 32px;
+}
+
+#content {
+    display: flex;
+    max-width:  90vw; 
+    max-height: 70vw;
+}
+
+.row{
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+}
+
+.space {
+    padding: 20px; 
+    border: solid #000 2px;
+    background: rgba(126, 121, 121, 0.589);
+}
