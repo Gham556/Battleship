@@ -1,0 +1,1 @@
+(()=>{"use strict";const o=document.querySelectorAll(".space");(()=>{for(let e of o)e.addEventListener("click",void((void 0).style.backgroundcolor="#FFF")),console.log(e)})()})();
