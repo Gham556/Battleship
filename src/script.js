@@ -80,11 +80,11 @@ const gameLoop = () => {
 
         const shipsArray = [carrier, battleship, destroyer, submarine, uBoat];
         
-       player1Board.placeShip(carrier, ['[1:1]', '[2:2]', '[3:3]', '[4:4]', '[5:5]']);
+       player1Board.placeShip(carrier, ['[1:1]', '[1:2]', '[1:3]', '[1:4]', '[1:5]']);
        player1Board.placeShip(battleship, ['[2:1]', '[2:2]', '[2:3]', '[2:4]']);
        player1Board.placeShip(destroyer, ['[3:1]', '[3:2]', '[3:3]']);
        player1Board.placeShip(submarine, ['[5:3]', '[5:4]', '[5:5]']);
-       player1Board.placeShip(uBoat, '[6:7]', '[6:8]');
+       player1Board.placeShip(uBoat, ['[6:7]', '[6:8]']);
     
     return {player1Board, player2Board}
 }
