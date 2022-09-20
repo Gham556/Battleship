@@ -86,6 +86,7 @@ const gameLoop = () => {
        player1Board.placeShip(submarine, ['[5:3]', '[5:4]', '[5:5]']);
        player1Board.placeShip(uBoat, ['[6:7]', '[6:8]']);
     
+    
     return {player1Board, player2Board}
 }
 export const patrolBoat = Ship(2, 'Patrol Boat');

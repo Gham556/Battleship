@@ -2,6 +2,12 @@
     margin: 0;
     padding: 0;
 }
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #playerBoard, #compBoard {
     display: grid;
     grid-template-rows: repeat(10, auto);
@@ -9,7 +15,7 @@
 }
 
 #content {
-    display: flex;
+    display: grid;
     max-width:  90vw; 
     max-height: 70vw;
 }
@@ -19,8 +25,53 @@
     grid-template-columns: repeat(10, auto);
 }
 
-.space {
+.space, .spaceNull {
     padding: 20px; 
     border: solid #000 2px;
     background: rgba(126, 121, 121, 0.589);
+    max-width: 0px;
+    max-height: 44px;
+}
+
+#shipContainer {
+    display: flex;
+    margin: 32px;
+}
+
+.gameBoardContainer {
+    display: flex;
+    max-width: 90vw;
+}
+
+#Carrier {
+    display: grid;
+    grid-template-columns: repeat(5, 44px);
+    margin: 16px;
+}
+
+#Battleship {
+    display: grid;
+    grid-template-columns: repeat(4, 44px);
+    margin: 16px;
+
+}
+
+#Destroyer {
+    display: grid;
+    grid-template-columns: repeat(3, 44px);
+    margin: 16px;
+
+}
+
+#Submarine {
+    display: grid;
+    grid-template-columns: repeat(3, 44px);
+    margin: 16px;
+}
+
+#Uboat {
+    display: grid;
+    grid-template-columns: repeat(2, 44px);
+    margin: 16px;
+
 }
