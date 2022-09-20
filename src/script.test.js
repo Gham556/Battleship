@@ -20,3 +20,4 @@ test('expect board generated from new game to return true on confirmed hit', () 
     expect(playerBoard.recieveAttack('[1:1]')).toBe(true)
 })
 
+

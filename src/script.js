@@ -35,19 +35,18 @@ const Gameboard = () => {
     const recieveAttack = (coOrdinates) => {
         if (board[coOrdinates] !== '') {
            board[`${coOrdinates}`].isHit()
-           return true
-        }
-        return false //will become missed attack in Dom elements
-
-        /*let counter = 0;  
-        for (let i of shipArray) {
-            if (i.isSunk === true)
+           let counter = 0;  
+        for (let i of shipsArray) {
+            if (i.isSunk() === true)
             counter ++; 
         }
         
-        if (counter === shipArray.length) {
-        //all ships sunk other player wins
-        }*/
+        if (counter === shipsArray.length) {
+        console.log('wins')
+        }
+           return true
+        }
+        return false //will become missed attack in Dom elements
     }
     
     return {board, placeShip, recieveAttack}
@@ -87,13 +86,14 @@ const gameLoop = () => {
        player1Board.placeShip(uBoat, ['[6:7]', '[6:8]']);
     
     
-    return {player1Board, player2Board}
+    return {player1Board, player2Board, shipsArray}
 }
 export const patrolBoat = Ship(2, 'Patrol Boat');
 export const board1 = Gameboard();
 export const computerPlayer = Player();
 const newGame = gameLoop();
 export const playerBoard = newGame.player1Board
+const shipsArray = newGame.shipsArray
  board1.placeShip(patrolBoat, ['[1:1]','[2:2]'])
 
 
