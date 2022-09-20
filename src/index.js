@@ -1,4 +1,4 @@
-import { Squares } from './DOMManipulation';
-import { patrolBoat, board1, computerPlayer }from './index.js';
+import { } from './DOMManipulation';
+import { patrolBoat, board1, computerPlayer, gameLoop }from './script';
 
-Squares();
+

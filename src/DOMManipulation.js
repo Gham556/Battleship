@@ -1,17 +1,24 @@
-const spaces = document.querySelectorAll('.space');
+import { playerBoard } from './script.js';
 
-export const Squares = () => {
+const Squares = () => {
     
+    const spaces = document.querySelectorAll('.space');
+    console.log(spaces)
 
-    const hitOrMiss = () => {
-        this.style.backgroundcolor = '#FFF';
-    };
+   
     
     for (let i of spaces) {
-        i.addEventListener('click', hitOrMiss())
-        console.log(i)
+        i.addEventListener('click', function () {
+            if (playerBoard.recieveAttack('[1:1]') === true) {
+                console.log(this.id)
+                this.style.backgroundColor = '#FFF'
+            }
+        
+        })
+    };
+    
+   
+
     };
 
-
-    return {hitOrMiss}
-}
+    Squares();

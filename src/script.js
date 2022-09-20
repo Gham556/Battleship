@@ -34,7 +34,8 @@ const Gameboard = () => {
 
     const recieveAttack = (coOrdinates) => {
         if (board[coOrdinates] !== '') {
-           return board[`${coOrdinates}`].isHit()
+           board[`${coOrdinates}`].isHit()
+           return true
         }
         return false //will become missed attack in Dom elements
 
@@ -65,7 +66,6 @@ const Player = () => {
 };
 
 const gameLoop = () => {
-    const newGame = () => {
         const player1 = Player();
         const player2 = Player();
         
@@ -85,12 +85,14 @@ const gameLoop = () => {
        player1Board.placeShip(destroyer, ['[3:1]', '[3:2]', '[3:3]']);
        player1Board.placeShip(submarine, ['[5:3]', '[5:4]', '[5:5]']);
        player1Board.placeShip(uBoat, '[6:7]', '[6:8]');
-    }
     
+    return {player1Board, player2Board}
 }
-
 export const patrolBoat = Ship(2, 'Patrol Boat');
 export const board1 = Gameboard();
 export const computerPlayer = Player();
-board1.placeShip(patrolBoat, ['[1:1]','[2:2]'])
+const newGame = gameLoop();
+export const playerBoard = newGame.player1Board
+ board1.placeShip(patrolBoat, ['[1:1]','[2:2]'])
+
 
