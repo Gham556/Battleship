@@ -2,7 +2,7 @@
 
 
 
-const Ship =  (health, name, sunk) => {
+export const Ship =  (health, name, sunk) => {
     let hits = 0; 
     sunk = false; 
     const isHit = () => hits += 1;
@@ -79,12 +79,6 @@ const gameLoop = () => {
 
         const shipsArray = [carrier, battleship, destroyer, submarine, uBoat];
         
-       player1Board.placeShip(carrier, ['[1:1]', '[1:2]', '[1:3]', '[1:4]', '[1:5]']);
-       player1Board.placeShip(battleship, ['[2:1]', '[2:2]', '[2:3]', '[2:4]']);
-       player1Board.placeShip(destroyer, ['[3:1]', '[3:2]', '[3:3]']);
-       player1Board.placeShip(submarine, ['[5:3]', '[5:4]', '[5:5]']);
-       player1Board.placeShip(uBoat, ['[6:7]', '[6:8]']);
-
        player2Board.placeShip(carrier, ['[10:1]', '[10:2]', '[10:3]', '[10:4]', '[10:5]'])
        player2Board.placeShip(battleship, ['[9:1]', '[9:2]', '[9:3]', '[9:4]']);
        player2Board.placeShip(destroyer, ['[8:1]', '[8:2]', '[8:3]']); 

@@ -1,4 +1,4 @@
-import { playerBoard, computerBoard, shipsArray, computerPlayer } from './script.js';
+import { playerBoard, computerBoard, shipsArray, computerPlayer, Ship } from './script.js';
 
 
 const spacesNull = document.getElementsByClassName('spaceNull');
@@ -25,6 +25,7 @@ const Squares = () => {
 
 const computerTurn = () => {
         const thisAttack = computerPlayer.randomProperty(playerBoard.board);
+        console.log(playerBoard)
         if(playerBoard.recieveAttack(thisAttack) === true) {
             for (let i of spacesNull) {
                 if (i.id === `A${thisAttack}`) {
@@ -55,6 +56,7 @@ const dragDestroyer = (event) => {
 const dragCarrier = (event) => {
     console.log('works')
     event.dataTransfer.setData("text", 5);
+    event.dataTransfer.setData('ship', 'Carrier')
     
 };
 
@@ -76,22 +78,41 @@ const dragUBoat = (event) => {
 const droppableElements = (() => {
   const boardDroppable = document.querySelector('#playerBoard');
   
-  const checkValidSpace = (event, size) => {
+  const checkValidSpace = (event, size, name) => {
+    const toPlaceArray = [];
+    const newToPlaceArray = [];
     const sizeTarget = event.id.split('');
     console.log(size)
         if(Number(size) + Number(sizeTarget[4]) > 11 || sizeTarget[5] === '0') {
-            console.log('doesnt fit')
-            return 
+            
         } 
         else {
-            console.log('fits')
+
+            event.style.background = 'rgb(122, 118, 118)';
+            let x = event.nextElementSibling;
+            x.style.background = "rgb(122, 118, 118)";
+            toPlaceArray.push(event.id, x.id);
+            for (let i = 2; i < Number(size); i++) {
+            x.nextElementSibling.style.background = "rgb(122, 118, 118)";
+            
+            x = x.nextElementSibling;
+            toPlaceArray.push(x.id);
+            };
+        for (let y of toPlaceArray) {
+           newToPlaceArray.push(y.substring(1))
+           
         }
+        const newShip = Ship(Number(size), name);
+        playerBoard.placeShip(newShip, newToPlaceArray);
+        console.log(playerBoard)
   } 
+};
   
   boardDroppable.addEventListener('drop', function (event) {
     event.preventDefault();
     const shipLength = event.dataTransfer.getData("text");
-    return checkValidSpace(event.target, shipLength);
+    const shipName = event.dataTransfer.getData("ship");
+    return checkValidSpace(event.target, shipLength, shipName);
   });
   boardDroppable.addEventListener('dragover', function (event) {
     event.preventDefault();
