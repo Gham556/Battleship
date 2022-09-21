@@ -1,4 +1,4 @@
-import { playerBoard, computerBoard, shipsArray, computerPlayer, Ship } from './script.js';
+import { playerBoard, computerBoard, computerPlayer, Ship } from './script.js';
 
 
 const spacesNull = document.getElementsByClassName('spaceNull');
@@ -11,7 +11,7 @@ const Squares = () => {
     for (let i of spaces) {
         i.addEventListener('click', function () {
             
-            if (computerBoard.recieveAttack(this.id) === true) {
+            if (computerBoard.recieveAttack(this.id, computerBoard) === true) {
                 this.style.backgroundColor = '#FFF'
             }
             else {
@@ -26,7 +26,7 @@ const Squares = () => {
 const computerTurn = () => {
         const thisAttack = computerPlayer.randomProperty(playerBoard.board);
         console.log(playerBoard)
-        if(playerBoard.recieveAttack(thisAttack) === true) {
+        if(playerBoard.recieveAttack(thisAttack, playerBoard) === true) {
             for (let i of spacesNull) {
                 if (i.id === `A${thisAttack}`) {
                 i.style.backgroundColor = '#FFF';
@@ -51,10 +51,10 @@ const computerTurn = () => {
 
 const dragDestroyer = (event) => {      
     event.dataTransfer.setData("text", 3);
+    event.dataTransfer.setData("ship", 'Destroyer')
         };
 
 const dragCarrier = (event) => {
-    console.log('works')
     event.dataTransfer.setData("text", 5);
     event.dataTransfer.setData('ship', 'Carrier')
     
@@ -62,17 +62,17 @@ const dragCarrier = (event) => {
 
 const dragBattleship = (event) => {
     event.dataTransfer.setData('text', 4)
-
+    event.dataTransfer.setData('ship', 'Battleship')
 };
 
 const dragSubmarine = (event) => {
     event.dataTransfer.setData('text', 3)
-
+    event.dataTransfer.setData('ship', 'Submarine')
 };
 
 const dragUBoat = (event) => {
     event.dataTransfer.setData('text', 2)
-
+    event.dataTransfer.setData('ship', 'uBoat')
 };
 
 const droppableElements = (() => {
@@ -103,6 +103,7 @@ const droppableElements = (() => {
            
         }
         const newShip = Ship(Number(size), name);
+        playerBoard.shipsArray.push(newShip);
         playerBoard.placeShip(newShip, newToPlaceArray);
         console.log(playerBoard)
   } 
