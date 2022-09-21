@@ -56,9 +56,9 @@ const Player = () => {
 
     
     const randomProperty = function (board) {
-      
-         const keys = Object.keys(board);
-        return board[keys[ keys.length * Math.random() << 0]];
+        const keys = Object.keys(board);
+        let x =  keys[ keys.length * Math.random() << 0];
+        return x
     }
 
     return {randomProperty}
@@ -84,16 +84,21 @@ const gameLoop = () => {
        player1Board.placeShip(destroyer, ['[3:1]', '[3:2]', '[3:3]']);
        player1Board.placeShip(submarine, ['[5:3]', '[5:4]', '[5:5]']);
        player1Board.placeShip(uBoat, ['[6:7]', '[6:8]']);
-    
-    
+
+       player2Board.placeShip(carrier, ['[10:1]', '[10:2]', '[10:3]', '[10:4]', '[10:5]'])
+       player2Board.placeShip(battleship, ['[9:1]', '[9:2]', '[9:3]', '[9:4]']);
+       player2Board.placeShip(destroyer, ['[8:1]', '[8:2]', '[8:3]']); 
+       player2Board.placeShip(submarine, ['[7:3]', '[7:4]', '[7:5]']);
+       player2Board.placeShip(uBoat, ['[1:7]', '[1:8]']);
     return {player1Board, player2Board, shipsArray}
 }
 export const patrolBoat = Ship(2, 'Patrol Boat');
 export const board1 = Gameboard();
 export const computerPlayer = Player();
 const newGame = gameLoop();
-export const playerBoard = newGame.player1Board
-const shipsArray = newGame.shipsArray
+export const playerBoard = newGame.player1Board;
+export const computerBoard = newGame.player2Board;
+export const shipsArray = newGame.shipsArray;
  board1.placeShip(patrolBoat, ['[1:1]','[2:2]'])
 
 
