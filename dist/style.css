@@ -28,9 +28,13 @@ body{
 .space, .spaceNull {
     padding: 20px; 
     border: solid #000 2px;
-    background: rgba(126, 121, 121, 0.589);
+    background: rgba(13, 161, 187, 0.589);
     max-width: 0px;
     max-height: 44px;
+}
+
+.ship {
+    background: rgb(122, 118, 118);
 }
 
 #shipContainer {

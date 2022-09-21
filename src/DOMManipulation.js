@@ -1,7 +1,8 @@
 import { playerBoard, computerBoard, shipsArray, computerPlayer } from './script.js';
 
 
-const spacesNull = document.getElementsByClassName('spaceNull')
+const spacesNull = document.getElementsByClassName('spaceNull');
+
 
 const Squares = () => {
     
@@ -47,43 +48,69 @@ const computerTurn = () => {
 
    
 
-const selectShips = () => {
+const dragDestroyer = (event) => {      
+    event.dataTransfer.setData("text", 3);
+        };
+
+const dragCarrier = (event) => {
+    console.log('works')
+    event.dataTransfer.setData("text", 5);
+    
+};
+
+const dragBattleship = (event) => {
+    event.dataTransfer.setData('text', 4)
+
+};
+
+const dragSubmarine = (event) => {
+    event.dataTransfer.setData('text', 3)
+
+};
+
+const dragUBoat = (event) => {
+    event.dataTransfer.setData('text', 2)
+
+};
+
+const droppableElements = (() => {
+  const boardDroppable = document.querySelector('#playerBoard');
+  
+  const checkValidSpace = (event, size) => {
+    const sizeTarget = event.id.split('');
+    console.log(size)
+        if(Number(size) + Number(sizeTarget[4]) > 11 || sizeTarget[5] === '0') {
+            console.log('doesnt fit')
+            return 
+        } 
+        else {
+            console.log('fits')
+        }
+  } 
+  
+  boardDroppable.addEventListener('drop', function (event) {
+    event.preventDefault();
+    const shipLength = event.dataTransfer.getData("text");
+    return checkValidSpace(event.target, shipLength);
+  });
+  boardDroppable.addEventListener('dragover', function (event) {
+    event.preventDefault();
+  });
+})();
+
+const selectShips = (() => {
     const destroyerElement = document.querySelector('#Destroyer');
     const carrierElement = document.querySelector('#Carrier');
     const battleshipElement = document.querySelector('#Battleship');
-    const submarineElement = document.querySelector('#Subamarine');
+    const submarineElement = document.querySelector('#Submarine');
     const uBoatElement = document.querySelector('#Uboat');
 
-    destroyerElement.addEventListener('click', queDestroyer);
-    carrierElement.addEventListener('click', queCarrier);
-    battleshipElement.addEventListener('click', queBattleship);
-    submarineElement.addEventListener('click', queSubmarine);
-    uBoatElement.addEventListener('click', queUBoat);
-};
+    destroyerElement.addEventListener('dragstart', dragDestroyer);
+    carrierElement.addEventListener('dragstart', dragCarrier);
+    battleshipElement.addEventListener('dragstart', dragBattleship);
+    submarineElement.addEventListener('dragstart', dragSubmarine);
+    uBoatElement.addEventListener('dragstart', dragUBoat);
 
-const queDestroyer = () => {
-    const playerSpaces = document.querySelectorAll('#spacesNull')
-    for (let i of playerSpaces) {
-        i.addEventListener('click', function () {
-
-        });
-    };
-};
-
-const queCarrier = () => {
-
-};
-
-const queBattleship = () => {
-
-};
-
-const queSubmarine = () => {
-
-};
-
-const queUBoat = () => {
-
-};
+})();
 
 Squares();
